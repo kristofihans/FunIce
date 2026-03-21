@@ -38,7 +38,7 @@ const DespreNoi = () => {
       {/* Static Hero Section */}
       <section 
         className="hero-static"
-        style={{ backgroundImage: `url("/productimages/vento vsv.jpg")` }}
+        style={{ backgroundImage: `url("productimages/vento vsv.jpg")` }}
       >
         <div className="slide-overlay">
           <div className="container slide-content animate-fade-in">
