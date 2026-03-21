@@ -16,100 +16,100 @@ const subcategoriesData = [
     category: "AHT Frigorifice",
     title: "Congelatoare și Lăzi Frigorifice AHT",
     products: [
-      { name: "Paris", image: "/productimages/paris.jpg" },
-      { name: "Salzburg", image: "/productimages/salzburg.jpg" },
-      { name: "Macao", image: "/productimages/macao.jpg" },
-      { name: "AthenXL", image: "/productimages/athenxl.jpg" },
-      { name: "Sydney", image: "/productimages/sydney.jpg" },
-      { name: "Montreal", image: "/productimages/montreal.jpg" },
-      { name: "Miami", image: "/productimages/miami.jpg" }
+      { name: "Paris", image: "productimages/paris.jpg" },
+      { name: "Salzburg", image: "productimages/salzburg.jpg" },
+      { name: "Macao", image: "productimages/macao.jpg" },
+      { name: "AthenXL", image: "productimages/athenxl.jpg" },
+      { name: "Sydney", image: "productimages/sydney.jpg" },
+      { name: "Montreal", image: "productimages/montreal.jpg" },
+      { name: "Miami", image: "productimages/miami.jpg" }
     ]
   },
   {
     category: "AHT Frigorifice",
     title: "Dulapuri Congelatoare Suspendate",
     products: [
-      { name: "Kinley", image: "/productimages/kinley.jpg" }
+      { name: "Kinley", image: "productimages/kinley.jpg" }
     ]
   },
   {
     category: "AHT Frigorifice",
     title: "Vitrine Verticale",
     products: [
-      { name: "Vento Hybrid", image: "/productimages/vento hybrid.jpg" },
-      { name: "Vento Water", image: "/productimages/vento water.jpg" },
-      { name: "Vento VSV", image: "/productimages/vento vsv.jpg" }
+      { name: "Vento Hybrid", image: "productimages/vento hybrid.jpg" },
+      { name: "Vento Water", image: "productimages/vento water.jpg" },
+      { name: "Vento VSV", image: "productimages/vento vsv.jpg" }
     ]
   },
   {
     category: "AHT Frigorifice",
     title: "Lăzi de Înghețată / Congelare",
     products: [
-      { name: "Rio", image: "/productimages/rio.jpg" },
-      { name: "Sao Paulo", image: "/productimages/sao paulo.jpg" }
+      { name: "Rio", image: "productimages/rio.jpg" },
+      { name: "Sao Paulo", image: "productimages/sao paulo.jpg" }
     ]
   },
   {
     category: "AHT Frigorifice",
     title: "Vitrine cu Perdea de Aer",
     products: [
-      { name: "Vitrine cu perdea de aer AC", image: "/productimages/vitrine cu perdea de aer ac.jpg" }
+      { name: "Vitrine cu perdea de aer AC", image: "productimages/vitrine cu perdea de aer ac.jpg" }
     ]
   },
   {
     category: "AHT Frigorifice",
     title: "Vitrine Frigorifice Coolpoint AHT",
     products: [
-      { name: "RVC-300 Black LED", image: "/productimages/RVC-300 Black LED.jpg" }
+      { name: "RVC-300 Black LED", image: "productimages/RVC-300 Black LED.jpg" }
     ]
   },
   {
     category: "Brutărie & Panificație",
     title: "Cuptoare DEBAG",
     products: [
-      { name: "Tehnologie Cuptoare Debag", image: "/productimages/debag.jpg" }
+      { name: "Tehnologie Cuptoare Debag", image: "productimages/debag.jpg" }
     ]
   },
   {
     category: "Brutărie & Panificație",
     title: "Echipamente GIERRE",
     products: [
-      { name: "Linia BAKETEK", image: "/productimages/Linia Baketek.jpg" },
-      { name: "Linia MEGA BAKERY", image: "/productimages/Linia Mega Bakery.jpg" },
-      { name: "Linia BRIO - SNACKERY", image: "/productimages/Linia BRIO - SNACKERY.jpg" }
+      { name: "Linia BAKETEK", image: "productimages/Linia Baketek.jpg" },
+      { name: "Linia MEGA BAKERY", image: "productimages/Linia Mega Bakery.jpg" },
+      { name: "Linia BRIO - SNACKERY", image: "productimages/Linia BRIO - SNACKERY.jpg" }
     ]
   },
   {
     category: "Brutărie & Panificație",
     title: "Sistem de Gătire SOGECO",
     products: [
-      { name: "KITCHEN 2.0", image: "/productimages/Kitchen 2.0.jpg" },
-      { name: "KITCHEN 4.0", image: "/productimages/Kitchen 4.0.jpg" }
+      { name: "KITCHEN 2.0", image: "productimages/Kitchen 2.0.jpg" },
+      { name: "KITCHEN 4.0", image: "productimages/Kitchen 4.0.jpg" }
     ]
   },
   {
     category: "Orizontale",
     title: "Vitrine Frigorifice Orizontale",
     products: [
-      { name: "Vitrina Frigorifică Samos Deep", image: "/productimages/Vitrina frigorifica Samos Deep.jpg" },
-      { name: "Vitrine Frigorifice Basia 2", image: "/productimages/Vitrine frigorifice Basia 2.jpg" }
+      { name: "Vitrina Frigorifică Samos Deep", image: "productimages/Vitrina frigorifica Samos Deep.jpg" },
+      { name: "Vitrine Frigorifice Basia 2", image: "productimages/Vitrine frigorifice Basia 2.jpg" }
     ]
   },
   {
     category: "Cofetărie",
     title: "Vitrine Pentru Cofetărie",
     products: [
-      { name: "Vitrina Frigorifică Innova", image: "/productimages/Vitrine frigorifica Innova.jpg" },
-      { name: "Vitrina Frigorifică Innova T", image: "/productimages/Vitrina frigorifica Innova T.jpg" },
-      { name: "Vitrină Cofetărie Cube", image: "/productimages/Vitrina frigorifica pentru cofetarie Cube.jpg" }
+      { name: "Vitrina Frigorifică Innova", image: "productimages/Vitrine frigorifica Innova.jpg" },
+      { name: "Vitrina Frigorifică Innova T", image: "productimages/Vitrina frigorifica Innova T.jpg" },
+      { name: "Vitrină Cofetărie Cube", image: "productimages/Vitrina frigorifica pentru cofetarie Cube.jpg" }
     ]
   },
   {
     category: "Servicii Speciale",
     title: "Categorii Speciale și Servicii",
     products: [
-      { name: "Echipamente AHT Recondiționate", image: "/productimages/Echipamente AHT reconditionate.jpg" },
-      { name: "Echipamente AHT pe Cel.ro", image: "/productimages/Echipamente AHT pe Cel.ro.jpg" }
+      { name: "Echipamente AHT Recondiționate", image: "productimages/Echipamente AHT reconditionate.jpg" },
+      { name: "Echipamente AHT pe Cel.ro", image: "productimages/Echipamente AHT pe Cel.ro.jpg" }
     ]
   }
 ];

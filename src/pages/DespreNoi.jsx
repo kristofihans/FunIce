@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 
 const sliderData = [
   {
-    image: '/productimages/vento vsv.jpg',
+    image: 'productimages/vento vsv.jpg',
     title: 'Soluții Frigorifice Premium',
     description: 'Echipamente de refrigerare și congelare la standarde globale.'
   },
   {
-    image: '/productimages/Vitrina frigorifica Samos Deep.jpg',
+    image: 'productimages/Vitrina frigorifica Samos Deep.jpg',
     title: 'Vitrine Frigorifice de Înaltă Calitate',
     description: 'Excelență în prezentarea și conservarea produselor.'
   },
   {
-    image: '/productimages/Echipamente AHT pe Cel.ro.jpg',
+    image: 'productimages/Echipamente AHT pe Cel.ro.jpg',
     title: 'Partenerul Tău de Încredere',
     description: 'Din 1996, oferim cele mai bune soluții pentru afacerea ta.'
   }
@@ -23,6 +23,8 @@ const sliderData = [
 
 const DespreNoi = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -39,10 +41,39 @@ const DespreNoi = () => {
     setCurrentSlide(currentSlide === 0 ? sliderData.length - 1 : currentSlide - 1);
   };
 
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+    
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
   return (
     <div className="home-page">
       {/* Hero Slider Section */}
-      <section className="hero-slider">
+      <section 
+        className="hero-slider"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {sliderData.map((slide, index) => (
           <div 
             key={index} 

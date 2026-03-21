@@ -55,6 +55,17 @@
   line-height: 1.5;
 }
 
+.clickable-link {
+  display: block;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.clickable-link:hover {
+  color: var(--accent-light);
+  text-decoration: underline;
+}
+
 /* Map */
 .map-container {
   height: 300px;

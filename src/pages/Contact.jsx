@@ -73,7 +73,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="info-title">Telefon</h4>
-                  <p className="info-desc">+40 123 456 789</p>
+                  <a href="tel:+40123456789" className="info-desc clickable-link">+40 123 456 789</a>
                 </div>
               </div>
 
@@ -83,21 +83,21 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="info-title">Email</h4>
-                  <p className="info-desc">office@funice.ro</p>
+                  <a href="mailto:office@funice.ro" className="info-desc clickable-link">office@funice.ro</a>
                 </div>
               </div>
             </div>
 
             <div className="map-container glass-card mt-8">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d87538.5414845582:21.87902092928574!2d21.87902092928574!3d47.05494491959325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474647e3687621c1%3A0x6bbaeeeae776fdd0!2sOradea!5e0!3m2!1sen!2sro!4v1699999999999!5m2!1sen!2sro"
+                src="https://maps.google.com/maps?q=Bulevardul%20Afacerilor,%20Nr.%2045,%20Bucure%C8%99ti,%20Rom%C3%A2nia&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps Oradea"
+                title="Google Maps București"
               ></iframe>
             </div>
           </div>
