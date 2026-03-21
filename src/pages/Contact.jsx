@@ -90,14 +90,14 @@ const Contact = () => {
 
             <div className="map-container glass-card mt-8">
               <iframe
-                src="https://maps.google.com/maps?q=Bulevardul%20Afacerilor,%20Nr.%2045,%20Bucure%C8%99ti,%20Rom%C3%A2nia&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Fun+Ice+S.R.L.,+Oradea&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps București"
+                title="Google Maps Fun Ice Oradea"
               ></iframe>
             </div>
           </div>

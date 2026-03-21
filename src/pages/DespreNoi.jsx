@@ -1,114 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import './DespreNoi.css';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Snowflake } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const sliderData = [
-  {
-    image: 'productimages/vento vsv.jpg',
-    title: 'Soluții Frigorifice Premium',
-    description: 'Echipamente de refrigerare și congelare la standarde globale.'
-  },
-  {
-    image: 'productimages/Vitrina frigorifica Samos Deep.jpg',
-    title: 'Vitrine Frigorifice de Înaltă Calitate',
-    description: 'Excelență în prezentarea și conservarea produselor.'
-  },
-  {
-    image: 'productimages/Echipamente AHT pe Cel.ro.jpg',
-    title: 'Partenerul Tău de Încredere',
-    description: 'Din 1996, oferim cele mai bune soluții pentru afacerea ta.'
-  }
+const localPartners = [
+  { name: 'Betty Ice', file: 'Betty Ice.webp' },
+  { name: 'Alpin 57 Lux', file: 'alpin 57 lux.webp' },
+  { name: 'Ati Cream', file: 'ati cream.jpg' },
+  { name: 'Bucovina SA', file: 'bucovina SA.jpg' },
+  { name: 'Cicom Târgoviște', file: 'cicom targoviste.png' },
+  { name: 'Crazy Ice', file: 'crazy ice.jpg' },
+  { name: 'Elion Constanța', file: 'elion constanta.jpg' },
+  { name: 'Hochland', file: 'hochland.jpg' },
+  { name: 'Ice Dyp Bals', file: 'ice dyp balas.jpg' },
+  { name: 'Nelson Prod', file: 'nelson prod.png' },
+  { name: 'Perena Prod', file: 'perena prod.webp' },
+  { name: 'Top Gel', file: 'top gel.png' }
 ];
 
+const PartnerLogoLocal = ({ partner }) => {
+  return (
+    <div className="partner-logo-wrapper">
+      <img 
+        src={`parteneriinostri/${partner.file}`} 
+        alt={partner.name} 
+        loading="lazy"
+        className="partner-logo-img-native"
+        title={partner.name}
+      />
+    </div>
+  );
+};
+
 const DespreNoi = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === sliderData.length - 1 ? 0 : prev + 1));
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const nextSlide = () => {
-    setCurrentSlide(currentSlide === sliderData.length - 1 ? 0 : currentSlide + 1);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? sliderData.length - 1 : currentSlide - 1);
-  };
-
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    
-    if (isLeftSwipe) {
-      nextSlide();
-    } else if (isRightSwipe) {
-      prevSlide();
-    }
-    
-    setTouchStart(0);
-    setTouchEnd(0);
-  };
-
   return (
     <div className="home-page">
-      {/* Hero Slider Section */}
+      {/* Static Hero Section */}
       <section 
-        className="hero-slider"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        className="hero-static"
+        style={{ backgroundImage: `url("/productimages/vento vsv.jpg")` }}
       >
-        {sliderData.map((slide, index) => (
-          <div 
-            key={index} 
-            className={`slide ${index === currentSlide ? 'active' : ''}`}
-            style={{ backgroundImage: `url("${slide.image}")` }}
-          >
-            <div className="slide-overlay">
-              <div className="container slide-content animate-fade-in">
-                <h1 className="slide-title">{slide.title}</h1>
-                <p className="slide-desc">{slide.description}</p>
-                <div className="mt-8" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                  <a href="#company-info" className="btn btn-primary">Află Mai Multe</a>
-                  <Link to="/produse" className="btn btn-outline" style={{ color: 'white', borderColor: 'rgba(255, 255, 255, 0.5)' }}>Vezi Produsele Noastre</Link>
-                </div>
-              </div>
+        <div className="slide-overlay">
+          <div className="container slide-content animate-fade-in">
+            <h1 className="slide-title">Soluții Frigorifice Premium</h1>
+            <p className="slide-desc">Echipamente de refrigerare și congelare la standarde globale</p>
+            <div className="mt-8" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href="#company-info" className="btn btn-primary">Află Mai Multe</a>
+              <Link to="/produse" className="btn btn-outline" style={{ color: 'white', borderColor: 'rgba(255, 255, 255, 0.5)' }}>Vezi Produsele Noastre</Link>
             </div>
           </div>
-        ))}
-        
-        <button className="slider-btn prev" onClick={prevSlide} aria-label="Previous slide">
-          <ChevronLeft size={32} />
-        </button>
-        <button className="slider-btn next" onClick={nextSlide} aria-label="Next slide">
-          <ChevronRight size={32} />
-        </button>
-        
-        <div className="slider-dots">
-          {sliderData.map((_, index) => (
-            <button 
-              key={index}
-              className={`dot-indicator ${index === currentSlide ? 'active' : ''}`}
-              onClick={() => setCurrentSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
         </div>
       </section>
 
@@ -148,29 +88,25 @@ const DespreNoi = () => {
               </div>
             </div>
 
-            <div className="company-sidebar">
-              <div className="glass-card partners-card sticky-card">
-                <h3 className="card-title text-gradient-accent">Partenerii Noștri</h3>
-                <div className="partners-list">
-                  <span>Hochland</span>
-                  <span>Betty Ice</span>
-                  <span>Bucovina SA</span>
-                  <span>Good People</span>
-                  <span>Ati Cream</span>
-                  <span>Top Gel</span>
-                  <span>Ice Dyp Bals</span>
-                  <span>Secret Prod</span>
-                  <span>Perena Prod</span>
-                  <span>Alpin 57 Lux</span>
-                  <span>Crazy Ice</span>
-                  <span>Calitas</span>
-                  <span>Elion Constanța</span>
-                  <span>Nelson Prod</span>
-                  <span>Cicom Târgoviște</span>
-                </div>
-              </div>
+            <div className="company-sidebar flex-center-col" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '3rem', background: 'rgba(5, 10, 20, 0.4)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)', boxShadow: 'inset 0 0 50px rgba(14, 165, 233, 0.1)' }}>
+               <Snowflake size={180} color="var(--accent-light)" strokeWidth={1.5} style={{ filter: 'drop-shadow(0 0 30px rgba(14, 165, 233, 0.6))', animation: 'spin-slow 30s linear infinite' }} />
+               <h2 style={{ fontSize: '4.5rem', fontWeight: 800, marginTop: '1.5rem', background: 'linear-gradient(to right, #fff, var(--accent-light))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>FunIce</h2>
+               <p style={{ color: 'var(--secondary-text)', letterSpacing: '6px', textTransform: 'uppercase', marginTop: '1rem', fontWeight: 600, fontSize: '0.9rem' }}>Din 1996</p>
             </div>
+          </div>
+        </div>
+      </section>
 
+      {/* Brand New Full Width Partners Marquee Section */}
+      <section className="partners-full-section">
+        <h2 className="section-title text-gradient-primary text-center" style={{ marginBottom: '2rem' }}>Partenerii Noștri</h2>
+        <div className="partners-marquee-container">
+          <div className="partners-marquee">
+            {localPartners.map((p, idx) => <PartnerLogoLocal key={`orig-${idx}`} partner={p} />)}
+            {/* Duplicate lines for ultra-wide seamless looping */}
+            {localPartners.map((p, idx) => <PartnerLogoLocal key={`dup1-${idx}`} partner={p} />)}
+            {localPartners.map((p, idx) => <PartnerLogoLocal key={`dup2-${idx}`} partner={p} />)}
+            {localPartners.map((p, idx) => <PartnerLogoLocal key={`dup3-${idx}`} partner={p} />)}
           </div>
         </div>
       </section>

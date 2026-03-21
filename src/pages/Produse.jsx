@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Produse.css';
-import { Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { Filter, ChevronDown, ChevronUp, X, Download } from 'lucide-react';
 
 const categories = [
   "Toate",
@@ -114,7 +114,7 @@ const subcategoriesData = [
   }
 ];
 
-const CollapsableSubcategory = ({ subcat, isOpen, onToggle }) => {
+const CollapsableSubcategory = ({ subcat, isOpen, onToggle, onProductClick }) => {
   const subcatImage = subcat.products[0]?.image;
 
   return (
@@ -138,7 +138,7 @@ const CollapsableSubcategory = ({ subcat, isOpen, onToggle }) => {
       <div className={`subcategory-content ${isOpen ? 'expanded' : ''}`}>
         <div className="product-grid">
           {subcat.products.map((product, idx) => (
-            <div key={idx} className="product-card glass-card">
+            <div key={idx} className="product-card glass-card" onClick={() => onProductClick(product)}>
               <div className="product-image-container">
                 <img src={product.image} alt={product.name} className="product-image" loading="lazy" />
               </div>
@@ -158,6 +158,9 @@ const Produse = () => {
   
   // Track open states independently using an object map
   const [openSubcats, setOpenSubcats] = useState({});
+  
+  // Lightbox state
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const filteredSubcats = activeCategory === "Toate" 
     ? subcategoriesData 
@@ -170,8 +173,72 @@ const Produse = () => {
     }));
   };
 
+  const closeLightbox = () => {
+    setSelectedProduct(null);
+  };
+
+  const getProductDescription = (name) => {
+    const descriptions = {
+      "Paris": "Lada frigorifică AHT Paris oferă o vizibilitate maximă a produselor și un volum generos cu eficiență energetică de top. Clasic, durabil și usor de întreținut.",
+      "Salzburg": "Design compact cu uși culisante din sticlă, perfect pentru spații comerciale medii, cu un consum energetic optimizat.",
+      "Macao": "Insulă frigorifică inovatoare cu control electronic, oferind o expunere panoramică ideală pentru supermarketuri și retail.",
+      "AthenXL": "Capacitate extra-large pentru produse congelate, cu un design robust, iluminare LED și decongelare semi-automată complet integrată.",
+      "Sydney": "Design curbat modern și ergonomic, maximizând capacitatea de stocare și vizibilitatea. Se integrează perfect în orice configurație comercială.",
+      "Montreal": "Soluție premium cu uși push-pull. Design form-factor minimalist pentru cel mai înalt grad de vizibilitate a produselor și accesibilitate.",
+      "Miami": "Tehnologie avansată cu cel mai mic consum de energie din clasa sa. Vitrină panoramică de nivel înalt, ideală pentru lanțuri moderne de retail.",
+      "Kinley": "Dulap frigorific suspendat revoluționar, oferind spațiu adițional de vânzare direct deasupra insulelor de congelare existente, optimizând metrii pătrați.",
+      "Vento Hybrid": "Vitrina frigorifică verticală plug-in, ce funcționează independent. Instalare usoara, fără emisii majore de căldură în magazin.",
+      "Vento Water": "Sistem vertical multi-deck conectat la o rețea de apă (Water loop) pentru o recuperare eficientă a căldurii și un design ultra-subțire.",
+      "Vento VSV": "Vento VSV reprezintă inovația supremă AHT, cu instalare rapidă de tip plug & play, flux de aer optimizat și un volum uriaș de depozitare flexibilă.",
+      "Rio": "Formă curbată și plată, perfectă pentru promovarea înghețatei și a produselor de impuls poziționate strategic direct la casa de marcat.",
+      "Sao Paulo": "Vizibilitate incredibilă cu uși frontale speciale arcuite asimetric, menținând calitatea înghețatei la cele mai inalte standarde posibile.",
+      "Vitrine cu perdea de aer AC": "Vitrină deschisă grab-and-go, cu perdea de aer stabilă și răcire ventilată, asigurând prospețimea perfectă a produselor alimentare.",
+      "RVC-300 Black LED": "Vitrină frigorifică elegantă pentru băuturi, într-un design complet negru mat, o ușă vitrată termo-izolantă și iluminare interioară LED vibrantă.",
+      "Tehnologie Cuptoare Debag": "Inovator și extrem de durabil. Cuptoare premium germane de patiserie si panificație destinate coacerii impecabile asistate de funcții abur inteligente.",
+      "Linia BAKETEK": "Performanță termodinamică pentru brutării profesionale intensiv tranzitate. Construcție durabilă Gierre din oțel inoxidabil de top.",
+      "Linia MEGA BAKERY": "Cea mai robustă alegere comercială pentru un flux de producție continuu, oferind volume de coacere excelente și distribuție precisă a temperaturii.",
+      "Linia BRIO - SNACKERY": "Compact dar absolut puternic. Formatul ideal pentru gatitul de snack-uri, pentru patiserii mici, gastro-bar-uri, bistro-uri și covrigării.",
+      "KITCHEN 2.0": "Echipament versatil și inteligent SOGECO pentru gastronomie. Garantează un răspuns rapid la cerința permanentă a oricărei bucătării dinamice.",
+      "KITCHEN 4.0": "Noua eră a sistemelor de gătire profesionale. Beneficiază de un control digital complet intuitiv, precizie maximă și curățare complet automatizată.",
+      "Vitrina Frigorifică Samos Deep": "Design excelent la superlativ, oferind o adâncime de dispunere mărită pentru o prezentare impresionantă a selecțiilor de brânzeturi, cărnuri și mezeluri.",
+      "Vitrine Frigorifice Basia 2": "Vitrină panoramică de servire ireproșabilă. Un sistem fiabil cu ventilație internă asistată, expunere mare și design front end extrem de curat.",
+      "Vitrina Frigorifică Innova": "Eleganță formidabilă prin detalii. Sticlă frontală dreaptă, minimalism de lux absolut și finisaje premium, perfect dedicate pentru cofetării rafinate.",
+      "Vitrina Frigorifică Innova T": "Variația superioară a faimoasei game Innova echipată cu geam arcuit. Aport maxim de vizibilitate vizuală frontală pentru prajituri și torturi artizanale.",
+      "Vitrină Cofetărie Cube": "Echipament cu formă compactă, stil exclusiv perfect cubic. Iluminare perimtrală interioară avansată ce atrage direct privirea către colecțiile dulci expuse.",
+      "Echipamente AHT Recondiționate": "Standardele stricte de calitate AHT, făcute mai accesibile. Seria de echipamente riguros testate în centru, recondiționate și garantate sa opereze impecabil.",
+      "Echipamente AHT pe Cel.ro": "Cele mai apreciate variante AHT selecționate și stocate pentru achiziție sigură direct prin rețelele noastre de platforme partenere locale și Cel.ro."
+    };
+    return descriptions[name] || "Echipament profesional de top, fabricat integral sub cele mai înalte norme de calitate internațională. Proiectat special pentru a oferi funcționalitate ireproșabilă, eficiență energetică, și susținere excelentă în orice mediu solicitant.";
+  };
+
   return (
     <div className="produse-page">
+      {/* Lightbox */}
+      {selectedProduct && (
+        <div className="lightbox-overlay" onClick={closeLightbox}>
+          <div className="lightbox-content glass-card animate-fade-in" onClick={e => e.stopPropagation()}>
+            <button className="lightbox-close" onClick={closeLightbox}>
+              <X size={24} />
+            </button>
+            <div className="lightbox-image-wrapper">
+              <img src={selectedProduct.image} alt={selectedProduct.name} />
+            </div>
+            <div className="lightbox-info">
+              <h2>{selectedProduct.name}</h2>
+              <p>{getProductDescription(selectedProduct.name)}</p>
+              <a 
+                href="https://www.funice.ro/ro/produse/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="btn btn-primary download-btn"
+              >
+                <Download size={18} />
+                Descarcă Fișa Tehnică
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Header */}
       <section className="produse-header animate-fade-in">
         <div className="container">
@@ -215,6 +282,7 @@ const Produse = () => {
                 subcat={subcat}
                 isOpen={!!openSubcats[globalIndex]}
                 onToggle={() => toggleSubcat(globalIndex)}
+                onProductClick={(product) => setSelectedProduct(product)}
               />
             )
           })}
